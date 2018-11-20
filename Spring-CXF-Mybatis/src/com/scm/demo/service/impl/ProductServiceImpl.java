@@ -38,7 +38,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Products> implements Pro
 	 * 动态查询
 	 */
 	@Override
-	public List<Products> queryForList(String sqlId, Products object) {
+	public List<Products> queryForList(String sqlId, Products object) throws Exception {
 		return productDao.queryForList(sqlId, object);
 	}
 
