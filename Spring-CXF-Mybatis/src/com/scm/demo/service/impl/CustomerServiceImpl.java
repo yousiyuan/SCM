@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.scm.demo.dao.CustomersDao;
 import com.scm.demo.entity.Customers;
 import com.scm.demo.service.CustomerService;
-
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customers> implements CustomerService {
 

@@ -56,7 +56,8 @@ public class CustomerMgrServiceImpl implements CustomerMgrService {
 	public List<Customers> getPersonList(Customers person) {
 		logger.info("CustomerMgrServiceImpl.getPersonList(Customers person)方法被调用");
 		try {
-			return customerService.queryForList("mapper.CUSTOMERS.queryCustomerByCondition", person);
+			List<Customers> customers = customerService.queryForList("mapper.CUSTOMERS.queryCustomerByCondition", person);
+			return customers;
 		} catch (Exception ex) {
 			printExceptionMessage(ex);
 			return new ArrayList<Customers>();
