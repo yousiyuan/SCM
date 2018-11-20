@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.scm.demo.entity.Customers" alias="customers" />
+		<typeAlias type="com.scm.demo.entity.OrderDetails" alias="orderdetails" />
+		<typeAlias type="com.scm.demo.entity.Orders" alias="orders" />
+		<typeAlias type="com.scm.demo.entity.Products" alias="products" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mapper/CUSTOMERS.xml" />
+		<mapper resource="mapper/ORDERDETAILS.xml" />
+		<mapper resource="mapper/ORDERS.xml" />
+		<mapper resource="mapper/PRODUCTS.xml" />
+	</mappers>
+
+</configuration>

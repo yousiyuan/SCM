@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ORDERDETAILS">
+  <resultMap id="BaseResultMap" type="com.scm.demo.entity.OrderDetails">
+    <result column="ORDERID" jdbcType="DECIMAL" property="orderid" />
+    <result column="PRODUCTID" jdbcType="DECIMAL" property="productid" />
+    <result column="UNITPRICE" jdbcType="DECIMAL" property="unitprice" />
+    <result column="QUANTITY" jdbcType="DECIMAL" property="quantity" />
+  </resultMap>
+  <insert id="insert" parameterType="com.scm.demo.entity.OrderDetails">
+    insert into ORDERDETAILS (ORDERID, PRODUCTID, UNITPRICE, 
+      QUANTITY)
+    values (#{orderid,jdbcType=DECIMAL}, #{productid,jdbcType=DECIMAL}, #{unitprice,jdbcType=DECIMAL}, 
+      #{quantity,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scm.demo.entity.OrderDetails">
+    insert into ORDERDETAILS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        ORDERID,
+      </if>
+      <if test="productid != null">
+        PRODUCTID,
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE,
+      </if>
+      <if test="quantity != null">
+        QUANTITY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=DECIMAL},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=DECIMAL},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

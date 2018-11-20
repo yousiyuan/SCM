@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ORDERS">
+  <resultMap id="BaseResultMap" type="com.scm.demo.entity.Orders">
+    <id column="ORDERID" jdbcType="DECIMAL" property="orderid" />
+    <result column="CUSTOMERID" jdbcType="VARCHAR" property="customerid" />
+    <result column="EMPLOYEEID" jdbcType="DECIMAL" property="employeeid" />
+    <result column="ORDERDATE" jdbcType="VARCHAR" property="orderdate" />
+    <result column="REQUIREDDATE" jdbcType="VARCHAR" property="requireddate" />
+    <result column="SHIPPEDDATE" jdbcType="VARCHAR" property="shippeddate" />
+    <result column="SHIPVIA" jdbcType="DECIMAL" property="shipvia" />
+    <result column="FREIGHT" jdbcType="DECIMAL" property="freight" />
+    <result column="SHIPNAME" jdbcType="VARCHAR" property="shipname" />
+    <result column="SHIPADDRESS" jdbcType="VARCHAR" property="shipaddress" />
+    <result column="SHIPCITY" jdbcType="VARCHAR" property="shipcity" />
+    <result column="SHIPREGION" jdbcType="VARCHAR" property="shipregion" />
+    <result column="SHIPPOSTALCODE" jdbcType="VARCHAR" property="shippostalcode" />
+    <result column="SHIPCOUNTRY" jdbcType="VARCHAR" property="shipcountry" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDERID, CUSTOMERID, EMPLOYEEID, ORDERDATE, REQUIREDDATE, SHIPPEDDATE, SHIPVIA, FREIGHT, 
+    SHIPNAME, SHIPADDRESS, SHIPCITY, SHIPREGION, SHIPPOSTALCODE, SHIPCOUNTRY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERS
+    where ORDERID = #{orderid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from ORDERS
+    where ORDERID = #{orderid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.scm.demo.entity.Orders">
+    insert into ORDERS (ORDERID, CUSTOMERID, EMPLOYEEID, 
+      ORDERDATE, REQUIREDDATE, SHIPPEDDATE, 
+      SHIPVIA, FREIGHT, SHIPNAME, 
+      SHIPADDRESS, SHIPCITY, SHIPREGION, 
+      SHIPPOSTALCODE, SHIPCOUNTRY)
+    values (#{orderid,jdbcType=DECIMAL}, #{customerid,jdbcType=VARCHAR}, #{employeeid,jdbcType=DECIMAL}, 
+      #{orderdate,jdbcType=VARCHAR}, #{requireddate,jdbcType=VARCHAR}, #{shippeddate,jdbcType=VARCHAR}, 
+      #{shipvia,jdbcType=DECIMAL}, #{freight,jdbcType=DECIMAL}, #{shipname,jdbcType=VARCHAR}, 
+      #{shipaddress,jdbcType=VARCHAR}, #{shipcity,jdbcType=VARCHAR}, #{shipregion,jdbcType=VARCHAR}, 
+      #{shippostalcode,jdbcType=VARCHAR}, #{shipcountry,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scm.demo.entity.Orders">
+    insert into ORDERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        ORDERID,
+      </if>
+      <if test="customerid != null">
+        CUSTOMERID,
+      </if>
+      <if test="employeeid != null">
+        EMPLOYEEID,
+      </if>
+      <if test="orderdate != null">
+        ORDERDATE,
+      </if>
+      <if test="requireddate != null">
+        REQUIREDDATE,
+      </if>
+      <if test="shippeddate != null">
+        SHIPPEDDATE,
+      </if>
+      <if test="shipvia != null">
+        SHIPVIA,
+      </if>
+      <if test="freight != null">
+        FREIGHT,
+      </if>
+      <if test="shipname != null">
+        SHIPNAME,
+      </if>
+      <if test="shipaddress != null">
+        SHIPADDRESS,
+      </if>
+      <if test="shipcity != null">
+        SHIPCITY,
+      </if>
+      <if test="shipregion != null">
+        SHIPREGION,
+      </if>
+      <if test="shippostalcode != null">
+        SHIPPOSTALCODE,
+      </if>
+      <if test="shipcountry != null">
+        SHIPCOUNTRY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=DECIMAL},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="requireddate != null">
+        #{requireddate,jdbcType=VARCHAR},
+      </if>
+      <if test="shippeddate != null">
+        #{shippeddate,jdbcType=VARCHAR},
+      </if>
+      <if test="shipvia != null">
+        #{shipvia,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null">
+        #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="shipname != null">
+        #{shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="shipaddress != null">
+        #{shipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcity != null">
+        #{shipcity,jdbcType=VARCHAR},
+      </if>
+      <if test="shipregion != null">
+        #{shipregion,jdbcType=VARCHAR},
+      </if>
+      <if test="shippostalcode != null">
+        #{shippostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcountry != null">
+        #{shipcountry,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scm.demo.entity.Orders">
+    update ORDERS
+    <set>
+      <if test="customerid != null">
+        CUSTOMERID = #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeid != null">
+        EMPLOYEEID = #{employeeid,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdate != null">
+        ORDERDATE = #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="requireddate != null">
+        REQUIREDDATE = #{requireddate,jdbcType=VARCHAR},
+      </if>
+      <if test="shippeddate != null">
+        SHIPPEDDATE = #{shippeddate,jdbcType=VARCHAR},
+      </if>
+      <if test="shipvia != null">
+        SHIPVIA = #{shipvia,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null">
+        FREIGHT = #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="shipname != null">
+        SHIPNAME = #{shipname,jdbcType=VARCHAR},
+      </if>
+      <if test="shipaddress != null">
+        SHIPADDRESS = #{shipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcity != null">
+        SHIPCITY = #{shipcity,jdbcType=VARCHAR},
+      </if>
+      <if test="shipregion != null">
+        SHIPREGION = #{shipregion,jdbcType=VARCHAR},
+      </if>
+      <if test="shippostalcode != null">
+        SHIPPOSTALCODE = #{shippostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipcountry != null">
+        SHIPCOUNTRY = #{shipcountry,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDERID = #{orderid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scm.demo.entity.Orders">
+    update ORDERS
+    set CUSTOMERID = #{customerid,jdbcType=VARCHAR},
+      EMPLOYEEID = #{employeeid,jdbcType=DECIMAL},
+      ORDERDATE = #{orderdate,jdbcType=VARCHAR},
+      REQUIREDDATE = #{requireddate,jdbcType=VARCHAR},
+      SHIPPEDDATE = #{shippeddate,jdbcType=VARCHAR},
+      SHIPVIA = #{shipvia,jdbcType=DECIMAL},
+      FREIGHT = #{freight,jdbcType=DECIMAL},
+      SHIPNAME = #{shipname,jdbcType=VARCHAR},
+      SHIPADDRESS = #{shipaddress,jdbcType=VARCHAR},
+      SHIPCITY = #{shipcity,jdbcType=VARCHAR},
+      SHIPREGION = #{shipregion,jdbcType=VARCHAR},
+      SHIPPOSTALCODE = #{shippostalcode,jdbcType=VARCHAR},
+      SHIPCOUNTRY = #{shipcountry,jdbcType=VARCHAR}
+    where ORDERID = #{orderid,jdbcType=DECIMAL}
+  </update>
+</mapper>

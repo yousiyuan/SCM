@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+          http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+          http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+
+	<!--cxf服务配置 -->
+	<jaxws:server id="customerService" address="/customerService" serviceClass="com.scm.demo.ws.service.CustomerMgrService">
+		<!-- 配置服务接口的实现类 -->
+		<jaxws:serviceBean>
+			<bean class="com.scm.demo.ws.service.impl.CustomerMgrServiceImpl"></bean>
+		</jaxws:serviceBean>
+		<!-- 设置输入输出拦截器 -->
+		<jaxws:features>
+			<bean class="org.apache.cxf.ext.logging.LoggingFeature"></bean>
+		</jaxws:features>
+	</jaxws:server>
+
+	<jaxws:server id="productService" address="/productService" serviceClass="com.scm.demo.ws.service.ProductMgrService">
+		<!-- 配置服务接口的实现类 -->
+		<jaxws:serviceBean>
+			<bean class="com.scm.demo.ws.service.impl.ProductMgrServiceImpl"></bean>
+		</jaxws:serviceBean>
+		<!-- 设置输入输出拦截器 -->
+		<jaxws:features>
+			<bean class="org.apache.cxf.ext.logging.LoggingFeature"></bean>
+		</jaxws:features>
+	</jaxws:server>
+
+</beans>

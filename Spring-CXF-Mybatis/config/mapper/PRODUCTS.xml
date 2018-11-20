@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PRODUCTS">
+	<resultMap id="BaseResultMap" type="com.scm.demo.entity.Products">
+		<id column="PRODUCTID" jdbcType="DECIMAL" property="productid" />
+		<result column="PRODUCTNAME" jdbcType="VARCHAR" property="productname" />
+		<result column="SUPPLIERID" jdbcType="DECIMAL" property="supplierid" />
+		<result column="CATEGORYID" jdbcType="DECIMAL" property="categoryid" />
+		<result column="QUANTITYPERUNIT" jdbcType="VARCHAR" property="quantityperunit" />
+		<result column="UNITPRICE" jdbcType="DECIMAL" property="unitprice" />
+		<result column="UNITSINSTOCK" jdbcType="DECIMAL" property="unitsinstock" />
+		<result column="UNITSONORDER" jdbcType="DECIMAL" property="unitsonorder" />
+		<result column="REORDERLEVEL" jdbcType="DECIMAL" property="reorderlevel" />
+		<result column="DISCONTINUED" jdbcType="DECIMAL" property="discontinued" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		PRODUCTID, PRODUCTNAME, SUPPLIERID, CATEGORYID, QUANTITYPERUNIT, UNITPRICE,
+		UNITSINSTOCK,
+		UNITSONORDER, REORDERLEVEL, DISCONTINUED
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PRODUCTS
+		where PRODUCTID = #{var}
+	</select>
+	<select id="queryProductByCondition" parameterType="products" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"></include>
+		  FROM PRODUCTS
+		<where>
+			<if test="productname != null">
+				AND PRODUCTNAME LIKE '%${productname}%'
+			</if>
+			<if test="supplierid != null">
+				AND SUPPLIERID = #{supplierid}
+			</if>
+			<if test="categoryid != null">
+				AND CATEGORYID = #{categoryid}
+			</if>
+		</where>
+	</select>
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM PRODUCTS
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from PRODUCTS
+		where PRODUCTID = #{var}
+	</delete>
+	<insert id="insert" parameterType="com.scm.demo.entity.Products">
+		insert into PRODUCTS (PRODUCTID, PRODUCTNAME, SUPPLIERID,
+		CATEGORYID, QUANTITYPERUNIT, UNITPRICE,
+		UNITSINSTOCK, UNITSONORDER, REORDERLEVEL,
+		DISCONTINUED)
+		values (#{productid,jdbcType=DECIMAL}, #{productname,jdbcType=VARCHAR},
+		#{supplierid,jdbcType=DECIMAL},
+		#{categoryid,jdbcType=DECIMAL}, #{quantityperunit,jdbcType=VARCHAR}, #{unitprice,jdbcType=DECIMAL},
+		#{unitsinstock,jdbcType=DECIMAL}, #{unitsonorder,jdbcType=DECIMAL},
+		#{reorderlevel,jdbcType=DECIMAL},
+		#{discontinued,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.scm.demo.entity.Products">
+		<selectKey keyProperty="productid" order="BEFORE" resultType="int">
+            SELECT SEQ_TAB_PRODUCT_ID.NEXTVAL FROM DUAL
+    	</selectKey>
+		insert into PRODUCTS
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				PRODUCTID,
+			<if test="productname != null">
+				PRODUCTNAME,
+			</if>
+			<if test="supplierid != null">
+				SUPPLIERID,
+			</if>
+			<if test="categoryid != null">
+				CATEGORYID,
+			</if>
+			<if test="quantityperunit != null">
+				QUANTITYPERUNIT,
+			</if>
+			<if test="unitprice != null">
+				UNITPRICE,
+			</if>
+			<if test="unitsinstock != null">
+				UNITSINSTOCK,
+			</if>
+			<if test="unitsonorder != null">
+				UNITSONORDER,
+			</if>
+			<if test="reorderlevel != null">
+				REORDERLEVEL,
+			</if>
+			<if test="discontinued != null">
+				DISCONTINUED,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				#{productid},
+			<if test="productname != null">
+				#{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierid != null">
+				#{supplierid,jdbcType=DECIMAL},
+			</if>
+			<if test="categoryid != null">
+				#{categoryid,jdbcType=DECIMAL},
+			</if>
+			<if test="quantityperunit != null">
+				#{quantityperunit,jdbcType=VARCHAR},
+			</if>
+			<if test="unitprice != null">
+				#{unitprice,jdbcType=DECIMAL},
+			</if>
+			<if test="unitsinstock != null">
+				#{unitsinstock,jdbcType=DECIMAL},
+			</if>
+			<if test="unitsonorder != null">
+				#{unitsonorder,jdbcType=DECIMAL},
+			</if>
+			<if test="reorderlevel != null">
+				#{reorderlevel,jdbcType=DECIMAL},
+			</if>
+			<if test="discontinued != null">
+				#{discontinued,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.scm.demo.entity.Products">
+		update PRODUCTS
+		<set>
+			<if test="productname != null">
+				PRODUCTNAME = #{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="supplierid != null">
+				SUPPLIERID = #{supplierid,jdbcType=DECIMAL},
+			</if>
+			<if test="categoryid != null">
+				CATEGORYID = #{categoryid,jdbcType=DECIMAL},
+			</if>
+			<if test="quantityperunit != null">
+				QUANTITYPERUNIT = #{quantityperunit,jdbcType=VARCHAR},
+			</if>
+			<if test="unitprice != null">
+				UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+			</if>
+			<if test="unitsinstock != null">
+				UNITSINSTOCK = #{unitsinstock,jdbcType=DECIMAL},
+			</if>
+			<if test="unitsonorder != null">
+				UNITSONORDER = #{unitsonorder,jdbcType=DECIMAL},
+			</if>
+			<if test="reorderlevel != null">
+				REORDERLEVEL = #{reorderlevel,jdbcType=DECIMAL},
+			</if>
+			<if test="discontinued != null">
+				DISCONTINUED = #{discontinued,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where PRODUCTID = #{productid,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.scm.demo.entity.Products">
+		update PRODUCTS
+		set PRODUCTNAME = #{productname,jdbcType=VARCHAR},
+		SUPPLIERID = #{supplierid,jdbcType=DECIMAL},
+		CATEGORYID = #{categoryid,jdbcType=DECIMAL},
+		QUANTITYPERUNIT = #{quantityperunit,jdbcType=VARCHAR},
+		UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+		UNITSINSTOCK = #{unitsinstock,jdbcType=DECIMAL},
+		UNITSONORDER = #{unitsonorder,jdbcType=DECIMAL},
+		REORDERLEVEL = #{reorderlevel,jdbcType=DECIMAL},
+		DISCONTINUED = #{discontinued,jdbcType=DECIMAL}
+		where PRODUCTID = #{productid,jdbcType=DECIMAL}
+	</update>
+</mapper>

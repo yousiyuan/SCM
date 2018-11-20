@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CUSTOMERS">
+  <resultMap id="BaseResultMap" type="com.scm.demo.entity.Customers">
+    <id column="CUSTOMERID" jdbcType="VARCHAR" property="customerid" />
+    <result column="COMPANYNAME" jdbcType="VARCHAR" property="companyname" />
+    <result column="CONTACTNAME" jdbcType="VARCHAR" property="contactname" />
+    <result column="CONTACTTITLE" jdbcType="VARCHAR" property="contacttitle" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="REGION" jdbcType="VARCHAR" property="region" />
+    <result column="POSTALCODE" jdbcType="VARCHAR" property="postalcode" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CUSTOMERID, COMPANYNAME, CONTACTNAME, CONTACTTITLE, ADDRESS, CITY, REGION, POSTALCODE, 
+    COUNTRY, PHONE, FAX
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CUSTOMERS
+    where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+  </select>
+  <select id="queryCustomerByCondition" parameterType="customers" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CUSTOMERS
+		<where>
+			<if test="contactname != null">
+				AND CONTACTNAME LIKE '%${contactname}%'
+			</if>
+			<if test="phone != null">
+				AND PHONE = #{phone}
+			</if>
+			<if test="city != null">
+				AND CITY = #{city}
+			</if>
+		</where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CUSTOMERS
+    where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scm.demo.entity.Customers">
+    insert into CUSTOMERS (CUSTOMERID, COMPANYNAME, CONTACTNAME, 
+      CONTACTTITLE, ADDRESS, CITY, 
+      REGION, POSTALCODE, COUNTRY, 
+      PHONE, FAX)
+    values (#{customerid,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, #{contactname,jdbcType=VARCHAR}, 
+      #{contacttitle,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{region,jdbcType=VARCHAR}, #{postalcode,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scm.demo.entity.Customers">
+    insert into CUSTOMERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerid != null">
+        CUSTOMERID,
+      </if>
+      <if test="companyname != null">
+        COMPANYNAME,
+      </if>
+      <if test="contactname != null">
+        CONTACTNAME,
+      </if>
+      <if test="contacttitle != null">
+        CONTACTTITLE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="region != null">
+        REGION,
+      </if>
+      <if test="postalcode != null">
+        POSTALCODE,
+      </if>
+      <if test="country != null">
+        COUNTRY,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerid != null">
+        #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null">
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="contactname != null">
+        #{contactname,jdbcType=VARCHAR},
+      </if>
+      <if test="contacttitle != null">
+        #{contacttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null">
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scm.demo.entity.Customers">
+    update CUSTOMERS
+    <set>
+      <if test="companyname != null">
+        COMPANYNAME = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="contactname != null">
+        CONTACTNAME = #{contactname,jdbcType=VARCHAR},
+      </if>
+      <if test="contacttitle != null">
+        CONTACTTITLE = #{contacttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        REGION = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null">
+        POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scm.demo.entity.Customers">
+    update CUSTOMERS
+    set COMPANYNAME = #{companyname,jdbcType=VARCHAR},
+      CONTACTNAME = #{contactname,jdbcType=VARCHAR},
+      CONTACTTITLE = #{contacttitle,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      REGION = #{region,jdbcType=VARCHAR},
+      POSTALCODE = #{postalcode,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR}
+    where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+  </update>
+</mapper>
